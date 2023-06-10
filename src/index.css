@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+  @apply text-white font-bold bg-sky-600;
+}
+
+.default {
+  @apply text-black;
+}

@@ -14,7 +14,7 @@ const ErrorPage = () => {
         <div className="max-w-md text-center mt-12">
           <Link
             to="/"
-            className="btn bg-green-400 hover:bg-green-500 p-4 rounded-lg border-none"
+            className="btn text-white bg-sky-600 hover:bg-sky-400 p-4 rounded-lg border-none"
           >
             Back to homepage
           </Link>

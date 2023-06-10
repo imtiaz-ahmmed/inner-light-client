@@ -12,11 +12,12 @@ const Footer = () => {
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             fillRule="evenodd"
-            clip-rule="evenodd"
+            clipRule="evenodd"
             className="inline-block fill-current rounded-full"
             src="../../../../public/logo.png"
           />
 
+          <p className="font-bold text-sky-600 text-2xl">Inner Light</p>
           <p className="font-bold">
             Yoga & Meditation School <br />
             Providing reliable service since 2001
