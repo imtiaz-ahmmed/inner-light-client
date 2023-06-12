@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 const Register = () => {
   const {
@@ -10,7 +11,27 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { createUser, logOut, updateUser } = useContext(AuthContext);
+  const [registerError, setRegisterError] = useState("");
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        alert("Registration Completed Successfully");
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        updateUser(data.name, data.photoURL);
+        setRegisterError("");
+        logOut();
+        navigate("/login");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setRegisterError(errorMessage);
+        console.log(errorMessage);
+      });
+  };
   return (
     <div>
       <Helmet>
@@ -107,6 +128,9 @@ const Register = () => {
                     letter
                   </span>
                 )}
+                <p className="text-red-600 ">
+                  <small>{registerError}</small>
+                </p>
               </div>
 
               <div className="form-control">
