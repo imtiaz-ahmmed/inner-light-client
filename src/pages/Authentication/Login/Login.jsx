@@ -1,31 +1,36 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IoLogoFacebook, IoLogoGoogle, IoLogoGithub } from "react-icons/io";
+import {
+  IoLogoGoogle,
+  IoLogoGithub,
+  IoMdEyeOff,
+  IoIosEye,
+} from "react-icons/io";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../providers/AuthProviders";
 import Swal from "sweetalert2";
+
 const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+    reset,
   } = useForm();
   const location = useLocation();
   const { signIn, googleSignIn, githubLogIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
+  const [seePass, setSeePass] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
   const onSubmit = (data) => {
-    console.log(data);
     signIn(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         setLoginError("");
-        console.log(loggedUser);
-        form.reset;
+        reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -38,33 +43,35 @@ const Login = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setLoginError(errorMessage);
-        console.log(error);
       });
   };
+
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
-        //navigate(from, { replace: true });
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
   const handleGitHubSignIn = () => {
     githubLogIn()
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
-        //navigate(from, { replace: true });
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const togglePasswordVisibility = () => {
+    setSeePass((prevSeePass) => !prevSeePass);
+  };
+
   return (
     <div>
       <Helmet>
@@ -102,9 +109,16 @@ const Login = () => {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
+                  <div className="-mb-24 mr-5 text-3xl block relative  ">
+                    {seePass ? (
+                      <IoMdEyeOff onClick={togglePasswordVisibility} />
+                    ) : (
+                      <IoIosEye onClick={togglePasswordVisibility} />
+                    )}
+                  </div>
                 </label>
                 <input
-                  type="password"
+                  type={seePass ? "text" : "password"}
                   {...register("password", {
                     required: true,
                     minLength: 6,
@@ -120,12 +134,12 @@ const Login = () => {
                 )}
                 {errors.password?.type === "minLength" && (
                   <span className="text-red-600">
-                    Password must be 6 character
+                    Password must be 6 characters
                   </span>
                 )}
                 {errors.password?.type === "pattern" && (
                   <span className="text-red-600">
-                    Password must a special character & a capital letter
+                    Password must have a special character & a capital letter
                   </span>
                 )}
                 <label className="label">
@@ -133,7 +147,7 @@ const Login = () => {
                     Forgot password?
                   </a>
                 </label>
-                <p className="text-red-600 ">
+                <p className="text-red-600">
                   <small>{loginError}</small>
                 </p>
               </div>
