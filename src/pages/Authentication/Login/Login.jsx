@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoLogoFacebook, IoLogoGoogle, IoLogoGithub } from "react-icons/io";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../../../providers/AuthProviders";
+import Swal from "sweetalert2";
 const Login = () => {
   const {
     register,
@@ -10,7 +12,59 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const location = useLocation();
+  const { signIn, googleSignIn, githubLogIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
+
+  const from = location.state?.from?.pathname || "/";
+  const onSubmit = (data) => {
+    console.log(data);
+    signIn(data.email, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        setLoginError("");
+        console.log(loggedUser);
+        form.reset;
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log In Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setLoginError(errorMessage);
+        console.log(error);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        //navigate(from, { replace: true });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleGitHubSignIn = () => {
+    githubLogIn()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        //navigate(from, { replace: true });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <Helmet>
@@ -79,6 +133,9 @@ const Login = () => {
                     Forgot password?
                   </a>
                 </label>
+                <p className="text-red-600 ">
+                  <small>{loginError}</small>
+                </p>
               </div>
               <div className="form-control mt-6">
                 <input
@@ -95,9 +152,12 @@ const Login = () => {
                 </p>
                 <p className="pt-4 text-center">Or sign in with</p>
                 <div className="flex justify-center gap-4 p-4">
-                  <IoLogoFacebook className="text-4xl rounded-full" />
-                  <IoLogoGithub className="text-4xl rounded-full" />
-                  <IoLogoGoogle className="text-4xl rounded-full" />
+                  <button onClick={handleGitHubSignIn}>
+                    <IoLogoGithub className="text-4xl rounded-full" />
+                  </button>
+                  <button onClick={handleGoogleSignIn}>
+                    <IoLogoGoogle className="text-4xl rounded-full" />
+                  </button>
                 </div>
               </div>
             </form>

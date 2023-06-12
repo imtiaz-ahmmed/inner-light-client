@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../../public/logo-transparent.png";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProviders";
+import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut();
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Log Out Successful!",
+      showConfirmButton: false,
+      timer: 1500,
+    })
+      .then()
+      .catch((error) => console.log(error));
+  };
   return (
     <div>
       <div className="navbar bg-lime-50">
@@ -27,46 +43,83 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? "active" : "default"
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/instructor"
-                  className={({ isActive }) =>
-                    isActive ? "active" : "default"
-                  }
-                >
-                  Instructor
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/classes"
-                  className={({ isActive }) =>
-                    isActive ? "active" : "default"
-                  }
-                >
-                  Classes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    isActive ? "active" : "default"
-                  }
-                >
-                  Dashboard
-                </NavLink>
-              </li>
+              {user ? (
+                <>
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/instructor"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Instructor
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/classes"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Classes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Home
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/instructor"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Instructor
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/classes"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "default"
+                      }
+                    >
+                      Classes
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
           <div className="md:flex justify-center  items-center">
@@ -78,47 +131,110 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-xl text-sky-600 ">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? "active" : "default")}
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/instructor"
-                className={({ isActive }) => (isActive ? "active" : "default")}
-              >
-                Instructor
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/classes"
-                className={({ isActive }) => (isActive ? "active" : "default")}
-              >
-                Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) => (isActive ? "active" : "default")}
-              >
-                Dashboard
-              </NavLink>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/instructor"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Instructor
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/classes"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/instructor"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Instructor
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/classes"
+                    className={({ isActive }) =>
+                      isActive ? "active" : "default"
+                    }
+                  >
+                    Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
-          <Link
-            to={"/login"}
-            className="btn text-white bg-sky-600 hover:bg-sky-400 p-4 rounded-lg border-none"
-          >
-            Login
-          </Link>
+          {user ? (
+            <div className="flex gap-2 items-center ">
+              <img
+                className="h-12 w-12 lg:h-20 lg:w-20 rounded-full "
+                src={user.photoURL ? user.photoURL : ""}
+                alt=""
+                data-tooltip-id="user-name"
+                data-tooltip-content={user.displayName ? user.displayName : ""}
+              />
+              <Tooltip id="user-name" />
+              <button
+                onClick={handleLogOut}
+                className="btn text-white bg-sky-600 hover:bg-sky-400 p-4 rounded-lg border-none"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to={"/login"}>
+              <button className="btn text-white bg-sky-600 hover:bg-sky-400 p-4 rounded-lg border-none">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
