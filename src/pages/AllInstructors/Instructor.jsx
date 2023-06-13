@@ -11,7 +11,7 @@ const Instructor = ({ instructor }) => {
   } = instructor;
   return (
     <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <div className="card card-compact h-full w-96 bg-base-100 shadow-xl">
         <figure
           data-aos="fade-down"
           data-aos-easing="linear"

@@ -39,7 +39,7 @@ const AllInstructors = () => {
             />
           </div>
         ) : (
-          <div className="grid justify-items-center grid-cols-1 md:grid-cols-3 gap-9  md:px-32 py-10 ">
+          <div className="grid justify-items-center grid-cols-1 md:grid-cols-3 gap-20 md:px-32 py-10 ">
             {allInstructors.map((instructor) => {
               return (
                 <Instructor
