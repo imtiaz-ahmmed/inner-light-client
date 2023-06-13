@@ -1,29 +1,27 @@
 import React from "react";
-import { Slide } from "react-awesome-reveal";
-import PopularClass from "./PopularClass";
 import { useState } from "react";
 import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-AOS.init();
-const PopularClasses = () => {
-  const [popularClasses, setPopularClasses] = useState([]);
+import { Slide } from "react-awesome-reveal";
+import PopularInstructor from "./PopularInstructor";
+const PopularInstructors = () => {
+  const [popularInstructors, setPopularInstructors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("http://localhost:5000/instructors")
       .then((res) => res.json())
       .then((data) => {
-        setPopularClasses(data);
+        setPopularInstructors(data);
         setIsLoading(false);
       });
   }, []);
   return (
-    <div className="bg-slate-50">
+    <div className="bg-orange-50">
       {/* Titlle */}
       <div className="text-center  p-4">
-        <Slide direction="right">
-          <h1 className="text-sky-600 font-bold text-5xl">Popular Classes</h1>
+        <Slide direction="left">
+          <h1 className="text-sky-600 font-bold text-5xl">
+            Popular Instructors
+          </h1>
         </Slide>
       </div>
 
@@ -39,12 +37,12 @@ const PopularClasses = () => {
         </div>
       ) : (
         <div className="grid justify-items-center grid-cols-1 md:grid-cols-3 gap-9  md:px-32 py-10 ">
-          {popularClasses.map((popularClass) => {
+          {popularInstructors.map((popularInstructor) => {
             return (
-              <PopularClass
-                key={popularClass._id}
-                popularClass={popularClass}
-              ></PopularClass>
+              <PopularInstructor
+                key={popularInstructor._id}
+                popularInstructor={popularInstructor}
+              ></PopularInstructor>
             );
           })}
         </div>
@@ -53,4 +51,4 @@ const PopularClasses = () => {
   );
 };
 
-export default PopularClasses;
+export default PopularInstructors;
