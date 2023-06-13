@@ -21,7 +21,7 @@ const Contact = () => {
       data-aos-duration="1500"
     >
       <div className="hero  ">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero-content flex-col lg:flex-row-reverse gap-10">
           <div className="text-center lg:text-left">
             {/* <h1 className="text-5xl font-bold text-sky-600">Contact Us</h1> */}
             <Slide direction="right">

@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 const Banner = () => {
   return (
     <div>
-      <Carousel>
+      <Carousel showThumbs={false}>
         <div
           className="carousel-item relative bg-cover bg-center h-screen"
           style={{

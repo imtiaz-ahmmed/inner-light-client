@@ -57,17 +57,17 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/instructor"
+                      to="/all-instructors"
                       className={({ isActive }) =>
                         isActive ? "active" : "default"
                       }
                     >
-                      Instructor
+                      Instructors
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/classes"
+                      to="/all-classes"
                       className={({ isActive }) =>
                         isActive ? "active" : "default"
                       }
@@ -100,17 +100,17 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/instructor"
+                      to="/all-instructors"
                       className={({ isActive }) =>
                         isActive ? "active" : "default"
                       }
                     >
-                      Instructor
+                      Instructors
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/classes"
+                      to="/all-classes"
                       className={({ isActive }) =>
                         isActive ? "active" : "default"
                       }
@@ -145,17 +145,17 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/instructor"
+                    to="/all-instructors"
                     className={({ isActive }) =>
                       isActive ? "active" : "default"
                     }
                   >
-                    Instructor
+                    Instructors
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="/classes"
+                    to="/all-classes"
                     className={({ isActive }) =>
                       isActive ? "active" : "default"
                     }
@@ -188,17 +188,17 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/instructor"
+                    to="/all-instructors"
                     className={({ isActive }) =>
                       isActive ? "active" : "default"
                     }
                   >
-                    Instructor
+                    Instructors
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="/classes"
+                    to="/all-classes"
                     className={({ isActive }) =>
                       isActive ? "active" : "default"
                     }
