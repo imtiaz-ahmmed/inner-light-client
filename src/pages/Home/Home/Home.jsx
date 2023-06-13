@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Banner from "../Banner/Banner";
 import PopularClasses from "../PopularClasses/PopularClasses";
 import PopularInstructors from "../../PopularInstructors/PopularInstructors";
+import Contact from "../Contact/Contact";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Banner></Banner>
       <PopularClasses></PopularClasses>
       <PopularInstructors></PopularInstructors>
+      <Contact></Contact>
     </div>
   );
 };

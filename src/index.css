@@ -7,5 +7,5 @@
 }
 
 .default {
-  @apply text-white font-bold;
+  @apply text-zinc-800 font-bold;
 }
