@@ -7,5 +7,5 @@
 }
 
 .default {
-  @apply text-black;
+  @apply text-white font-bold;
 }
