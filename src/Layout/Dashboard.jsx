@@ -11,6 +11,8 @@ import { SiGoogleclassroom, SiHomeassistant } from "react-icons/si";
 import { GiTeacher } from "react-icons/gi";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
+import { Slide } from "react-awesome-reveal";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
@@ -29,6 +31,9 @@ const Dashboard = () => {
   };
   return (
     <div className="drawer lg:drawer-open">
+      <Helmet>
+        <title>Inner Light | My Dashboard</title>
+      </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         <label
@@ -37,7 +42,11 @@ const Dashboard = () => {
         >
           Open drawer
         </label>
-
+        <div className="text-center  p-4">
+          <Slide direction="right">
+            <h1 className="text-sky-600 font-bold text-5xl">My Dashboard</h1>
+          </Slide>
+        </div>
         <Outlet></Outlet>
       </div>
       <div className="drawer-side">
