@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import { SiGoogleclassroom, SiHomeassistant } from "react-icons/si";
 import { GiTeacher } from "react-icons/gi";
+import { ImUsers } from "react-icons/im";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
@@ -29,6 +30,8 @@ const Dashboard = () => {
       .then()
       .catch((error) => console.log(error));
   };
+
+  const isAdmin = true;
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
@@ -53,40 +56,87 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80  h-full bg-sky-600 text-white font-bold">
           {/* Sidebar content here */}
-          <li>
-            <NavLink
-              to={"/dashboard"}
-              className={({ isActive }) => (isActive ? "dActive" : "dDefault")}
-            >
-              <SiHomeassistant />
-              My Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/dashboard/my-selected-classes"}
-              className={({ isActive }) => (isActive ? "dActive" : "dDefault")}
-            >
-              <MdFlightClass />
-              My Selected Classes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/dashboard/my-enrolled-classes"}
-              className={({ isActive }) => (isActive ? "dActive" : "dDefault")}
-            >
-              <SiGoogleclassroom /> My Enrolled Classes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/dashboard/my-payment-history"}
-              className={({ isActive }) => (isActive ? "dActive" : "dDefault")}
-            >
-              <MdOutlineWallet /> My Payment History
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+              <li>
+                <NavLink
+                  to={"/dashboard/admin"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiHomeassistant />
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/admin/manage-classes"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiGoogleclassroom />
+                  Manage Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/admin/manage-users"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <ImUsers /> Manage Users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  to={"/dashboard/student"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiHomeassistant />
+                  My Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/student/my-selected-classes"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <MdFlightClass />
+                  My Selected Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/student/my-enrolled-classes"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiGoogleclassroom /> My Enrolled Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/my-payment-history"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <MdOutlineWallet /> My Payment History
+                </NavLink>
+              </li>
+            </>
+          )}
           <div className="divider"></div>
           <li>
             <NavLink

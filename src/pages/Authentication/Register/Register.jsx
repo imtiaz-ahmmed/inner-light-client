@@ -16,6 +16,7 @@ const Register = () => {
 
   const [registerError, setRegisterError] = useState("");
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password).then((result) => {

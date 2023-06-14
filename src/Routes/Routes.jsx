@@ -9,7 +9,14 @@ import AllInstructors from "../pages/AllInstructors/AllInstructors";
 import AllClasses from "../pages/AllClasses/AllClasses";
 import SingleInstructorDetails from "../pages/SingleInstructorDetails/SingleInstructorDetails";
 import Dashboard from "../Layout/Dashboard";
-import MySelectedClasses from "../pages/Dashboard/MySelectedClasses/MySelectedClasses";
+
+import StudentDashboard from "../pages/Dashboard/Student/StudentDashboard/StudentDashboard";
+import MyEnrolledClasses from "../pages/Dashboard/Student/MyEnrolledClasses/MyEnrolledClasses";
+import MyPaymentHistory from "../pages/Dashboard/Student/MyPaymentHistory/MyPaymentHistory";
+import MySelectedClasses from "../pages/Dashboard/Student/MySelectedClasses/MySelectedClasses";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import ManageClasses from "../pages/Dashboard/Admin/ManageClasses/ManageClasses";
+import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard/AdminDashboard";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,8 +59,32 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
-        path: "/dashboard/my-selected-classes",
+        path: "/dashboard/student",
+        element: <StudentDashboard></StudentDashboard>,
+      },
+      {
+        path: "/dashboard/student/my-selected-classes",
         element: <MySelectedClasses></MySelectedClasses>,
+      },
+      {
+        path: "/dashboard/student/my-enrolled-classes",
+        element: <MyEnrolledClasses></MyEnrolledClasses>,
+      },
+      {
+        path: "/dashboard/my-payment-history",
+        element: <MyPaymentHistory></MyPaymentHistory>,
+      },
+      {
+        path: "/dashboard/admin",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "/dashboard/admin/manage-users",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "/dashboard/admin/manage-classes",
+        element: <ManageClasses></ManageClasses>,
       },
     ],
   },

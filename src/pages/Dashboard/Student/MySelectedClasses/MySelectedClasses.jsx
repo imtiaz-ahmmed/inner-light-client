@@ -1,8 +1,9 @@
 import React from "react";
-import useSelectedClass from "../../../Hooks/useSelectedClass";
+
 import { Helmet } from "react-helmet";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
+import useSelectedClass from "../../../../Hooks/useSelectedClass";
 
 const MySelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClass();
