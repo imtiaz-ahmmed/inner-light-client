@@ -3,6 +3,7 @@ import useSelectedClass from "../../../Hooks/useSelectedClass";
 import { Helmet } from "react-helmet";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
+
 const MySelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClass();
   const total = selectedClasses.reduce(
@@ -29,11 +30,25 @@ const MySelectedClasses = () => {
             if (data.deleteCount > 0) {
               refetch();
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            } else {
+              Swal.fire(
+                "Not Deleted!",
+                "The file could not be deleted.",
+                "error"
+              );
             }
+          })
+          .catch((error) => {
+            Swal.fire(
+              "Not Deleted!",
+              "An error occurred while deleting the file.",
+              "error"
+            );
           });
       }
     });
   };
+
   return (
     <div className="w-full p-10">
       <Helmet>

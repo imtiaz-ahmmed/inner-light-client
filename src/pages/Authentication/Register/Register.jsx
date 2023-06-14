@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
-
+import { IoLogoGoogle, IoLogoGithub } from "react-icons/io";
 const Register = () => {
   const {
     register,
@@ -11,33 +11,91 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const { createUser, logOut, updateUser } = useContext(AuthContext);
+  const { createUser, logOut, updateUser, googleSignIn, githubLogIn } =
+    useContext(AuthContext);
+
   const [registerError, setRegisterError] = useState("");
   const navigate = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email, data.password)
-      .then((result) => {
-        alert("Registration Completed Successfully");
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        updateUser(data.name, data.photoURL);
-        setRegisterError("");
-        logOut();
-        navigate("/login");
+    createUser(data.email, data.password).then((result) => {
+      const saveUser = { name: data.name, email: data.email };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
       })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setRegisterError(errorMessage);
-        console.log(errorMessage);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            alert("Registration Completed Successfully");
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            updateUser(data.name, data.photoURL);
+            setRegisterError("");
+            logOut();
+            navigate("/login");
+          }
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setRegisterError(errorMessage);
+          console.log(errorMessage);
+        });
+    });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result) => {
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+    });
+  };
+
+  const handleGitHubSignIn = () => {
+    githubLogIn().then((result) => {
+      const loggedInUser = result.user;
+      console.log(loggedInUser);
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+    });
   };
   return (
     <div>
       <Helmet>
         <title>Inner Light | Register</title>
       </Helmet>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200 pt-32">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Register now!</h1>
@@ -163,6 +221,15 @@ const Register = () => {
                     Go to log in
                   </Link>
                 </p>
+                <p className="pt-4 text-center">Or sign in with</p>
+                <div className="flex justify-center gap-4 p-4">
+                  <button onClick={handleGitHubSignIn}>
+                    <IoLogoGithub className="text-4xl rounded-full" />
+                  </button>
+                  <button onClick={handleGoogleSignIn}>
+                    <IoLogoGoogle className="text-4xl rounded-full" />
+                  </button>
+                </div>
               </div>
             </form>
           </div>
