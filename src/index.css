@@ -9,3 +9,11 @@
 .default {
   @apply text-zinc-800 font-bold;
 }
+
+.dActive {
+  @apply text-black font-bold bg-white;
+}
+
+.dDefault {
+  @apply text-white font-bold;
+}

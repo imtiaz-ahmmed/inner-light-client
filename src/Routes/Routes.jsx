@@ -7,6 +7,8 @@ import Register from "../pages/Authentication/Register/Register";
 import AllInstructors from "../pages/AllInstructors/AllInstructors";
 import AllClasses from "../pages/AllClasses/AllClasses";
 import SingleInstructorDetails from "../pages/SingleInstructorDetails/SingleInstructorDetails";
+import Dashboard from "../Layout/Dashboard";
+import MySelectedClasses from "../pages/Dashboard/MySelectedClasses/MySelectedClasses";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,11 +38,17 @@ export const router = createBrowserRouter([
       {
         path: "/all-instructors/instructor/:instructorName",
         element: <SingleInstructorDetails></SingleInstructorDetails>,
-        // loader: ({ params }) => {
-        //   fetch(
-        //     `http://localhost:5000/all-instructors/instructor/${params.instructorName}`
-        //   );
-        // },
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/dashboard/my-selected-classes",
+        element: <MySelectedClasses></MySelectedClasses>,
       },
     ],
   },

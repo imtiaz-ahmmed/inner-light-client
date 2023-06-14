@@ -77,7 +77,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/dashboard"
+                      to="/dashboard/my-selected-classes"
                       className={({ isActive }) =>
                         isActive ? "active" : "default"
                       }
