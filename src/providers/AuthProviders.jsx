@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -52,6 +53,19 @@ const AuthProviders = ({ children }) => {
       console.log("logged in user inside auth state observer", loggedUser);
       setUser(loggedUser);
       setLoading(false);
+      if (loggedUser) {
+        axios
+          .post("http://localhost:5000", {
+            email: loggedUser.email,
+          })
+          .then((data) => {
+            // console.log(data.data.token)
+            localStorage.setItem("access-token", data.data.token);
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+      }
     });
 
     return () => {

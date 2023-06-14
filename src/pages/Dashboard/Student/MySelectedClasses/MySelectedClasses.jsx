@@ -68,7 +68,7 @@ const MySelectedClasses = () => {
           <thead>
             <tr>
               <th>
-                <label></label>
+                <label>#</label>
               </th>
               <th>Class Name</th>
               <th>Total Seats</th>
