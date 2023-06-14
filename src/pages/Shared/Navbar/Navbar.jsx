@@ -215,10 +215,16 @@ const Navbar = () => {
             <div className="flex gap-2 items-center ">
               <img
                 className="h-12 w-12 lg:h-20 lg:w-20 rounded-full "
-                src={user.photoURL ? user.photoURL : ""}
+                src={
+                  user.photoURL
+                    ? user.photoURL
+                    : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
+                }
                 alt=""
                 data-tooltip-id="user-name"
-                data-tooltip-content={user.displayName ? user.displayName : ""}
+                data-tooltip-content={
+                  user.displayName ? user.displayName : "Maria"
+                }
               />
               <Tooltip id="user-name" />
               <button

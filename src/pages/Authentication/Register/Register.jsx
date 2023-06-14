@@ -19,8 +19,12 @@ const Register = () => {
   const from = location.state?.from?.pathname || "/";
   const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email, data.password).then((result) => {
-      const saveUser = { name: data.name, email: data.email };
+    createUser(data.email, data.password, data.photoURL).then((result) => {
+      const saveUser = {
+        name: data.name,
+        email: data.email,
+        photoURL: data.photoURL,
+      };
       fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
