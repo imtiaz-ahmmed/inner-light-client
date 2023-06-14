@@ -2,21 +2,66 @@ import React from "react";
 import { AuthContext } from "../../providers/AuthProviders";
 import { useContext } from "react";
 import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SingleClass = ({ allClass }) => {
-  const { className, classImage, price, instructorName, availableSeats } =
-    allClass;
+  const {
+    _id,
+    className,
+    classImage,
+    price,
+    instructorName,
+    availableSeats,
+    totalSeats,
+  } = allClass;
   const { user } = useContext(AuthContext);
-  const handleSelect = () => {
-    if (!user) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleSelect = (allClass) => {
+    console.log(allClass);
+    if (user && user.email) {
+      const selectedClass = {
+        selectedClassId: _id,
+        studentEmail: user.email,
+        className,
+        classImage,
+        instructorName,
+        availableSeats,
+        totalSeats,
+        price,
+      };
+      fetch("http://localhost:5000/selectedClasses", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectedClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Class Selected Successfully!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+    } else {
       Swal.fire({
-        title: "You have to log in first to Select",
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
+        title: "Login First to Select!",
+
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
       });
     }
   };
@@ -40,7 +85,7 @@ const SingleClass = ({ allClass }) => {
         </div>
         <div className="card-actions justify-center p-5">
           <button
-            onClick={handleSelect}
+            onClick={() => handleSelect(allClass)}
             className="btn w-full text-white bg-sky-600 hover:bg-sky-400 rounded-lg border-none text-md "
           >
             Select
