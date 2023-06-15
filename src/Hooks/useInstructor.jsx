@@ -6,7 +6,7 @@ import { AuthContext } from "../providers/AuthProviders";
 const useInstructor = () => {
   const { user, loading } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
-  // use axios secure with react query
+
   const { data: isInstructor, isLoading: isInstructorLoading } = useQuery({
     queryKey: ["isInstructor", user?.email],
     enabled: !loading,
