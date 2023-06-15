@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import { Slide } from "react-awesome-reveal";
 import useAdmin from "../Hooks/useAdmin";
+import useInstructor from "../Hooks/useInstructor";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
@@ -32,8 +33,8 @@ const Dashboard = () => {
       .catch((error) => console.log(error));
   };
 
-  // const isAdmin = true;
   const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
@@ -90,6 +91,41 @@ const Dashboard = () => {
                   }
                 >
                   <ImUsers /> Manage Users
+                </NavLink>
+              </li>
+            </>
+          ) : isInstructor ? (
+            <>
+              <li>
+                <NavLink
+                  to={"/dashboard/instructor"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiHomeassistant />
+                  Instructor Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/instructor/add-class"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <SiGoogleclassroom />
+                  Add Class
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/instructor/my-class"}
+                  className={({ isActive }) =>
+                    isActive ? "dActive" : "dDefault"
+                  }
+                >
+                  <ImUsers /> My Class
                 </NavLink>
               </li>
             </>
