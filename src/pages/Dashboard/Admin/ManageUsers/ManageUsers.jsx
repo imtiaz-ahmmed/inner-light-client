@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    const data = await res.json();
+    const res = await axiosSecure.get("/users");
+    const data = await res.data;
     return data;
   });
 

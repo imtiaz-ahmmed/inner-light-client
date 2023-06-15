@@ -14,6 +14,7 @@ import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import { Slide } from "react-awesome-reveal";
+import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
@@ -31,7 +32,8 @@ const Dashboard = () => {
       .catch((error) => console.log(error));
   };
 
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="drawer lg:drawer-open">
       <Helmet>
