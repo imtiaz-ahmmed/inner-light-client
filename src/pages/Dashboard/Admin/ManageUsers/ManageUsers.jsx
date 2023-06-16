@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Slide } from "react-awesome-reveal";
 
 const ManageUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -60,6 +61,11 @@ const ManageUsers = () => {
       <Helmet>
         <title>Inner Light | Manage Users</title>
       </Helmet>
+      <div className="text-center  p-4">
+        <Slide direction="right">
+          <h1 className="text-sky-600 font-bold text-5xl">Manage Users</h1>
+        </Slide>
+      </div>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
