@@ -1,9 +1,9 @@
 import React from "react";
-
 import { Helmet } from "react-helmet";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 import useSelectedClass from "../../../../Hooks/useSelectedClass";
+import { Link } from "react-router-dom";
 
 const MySelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClass();
@@ -104,9 +104,12 @@ const MySelectedClasses = () => {
                 <td>{row.availableSeats}</td>
                 <td>{row.price}</td>
                 <th>
-                  <button className="btn btn-success text-white btn-xs">
+                  <Link
+                    to={`/dashboard/payment?id=${row._id}`}
+                    className="btn btn-success text-white btn-xs"
+                  >
                     Pay Now
-                  </button>
+                  </Link>
                 </th>
                 <th>
                   <button
