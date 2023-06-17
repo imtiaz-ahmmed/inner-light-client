@@ -25,7 +25,7 @@ const Register = () => {
         email: data.email,
         photoURL: data.photoURL,
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -60,7 +60,7 @@ const Register = () => {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -82,7 +82,7 @@ const Register = () => {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

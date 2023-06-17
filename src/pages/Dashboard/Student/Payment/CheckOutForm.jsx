@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProviders";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import "./CheckoutForm.css";
+
 const CheckOutForm = ({ price, singleClass }) => {
   console.log(price);
   console.log(singleClass.className);

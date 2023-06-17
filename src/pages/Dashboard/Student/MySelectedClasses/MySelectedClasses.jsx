@@ -4,6 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 import useSelectedClass from "../../../../Hooks/useSelectedClass";
 import { Link } from "react-router-dom";
+import { Slide } from "react-awesome-reveal";
 
 const MySelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClass();
@@ -23,9 +24,12 @@ const MySelectedClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/selectedClasses/${row._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://inner-light-server-imtiaz-ahmmed.vercel.app/selectedClasses/${row._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deleteCount > 0) {
@@ -52,6 +56,11 @@ const MySelectedClasses = () => {
 
   return (
     <div className="w-full p-10">
+      <Slide direction="right">
+        <h1 className="text-sky-600 font-bold text-center text-5xl mb-8">
+          My Selected Classes
+        </h1>
+      </Slide>
       <Helmet>
         <title>Inner Light | My Selected Classes</title>
       </Helmet>

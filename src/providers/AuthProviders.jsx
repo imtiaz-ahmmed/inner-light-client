@@ -55,7 +55,7 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
       if (loggedUser) {
         axios
-          .post("http://localhost:5000", {
+          .post("https://inner-light-server-imtiaz-ahmmed.vercel.app", {
             email: loggedUser.email,
           })
           .then((data) => {

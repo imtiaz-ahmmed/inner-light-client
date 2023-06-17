@@ -9,7 +9,7 @@ const AllClasses = () => {
   const [allClasses, setAllClasses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/all-classes")
+    fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/all-classes")
       .then((res) => res.json())
       .then((data) => {
         setAllClasses(data);

@@ -46,13 +46,16 @@ const AddClass = () => {
             classImage: imgURL,
           };
           console.log(newClass);
-          fetch("http://localhost:5000/add-classes", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newClass),
-          })
+          fetch(
+            "https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes",
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newClass),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log("after posting new menu item", data);

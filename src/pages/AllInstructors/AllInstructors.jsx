@@ -8,7 +8,7 @@ const AllInstructors = () => {
   const [allInstructors, setAllInstructors] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/all-instructors")
+    fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/all-instructors")
       .then((res) => res.json())
       .then((data) => {
         setAllInstructors(data);

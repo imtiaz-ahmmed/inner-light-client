@@ -12,7 +12,7 @@ const MyClass = () => {
     const fetchClasses = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/add-classes?email=${user?.email}`
+          `https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes?email=${user?.email}`
         );
         if (response.ok) {
           const data = await response.json();

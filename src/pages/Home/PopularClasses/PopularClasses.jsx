@@ -11,7 +11,7 @@ const PopularClasses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://inner-light-server-imtiaz-ahmmed.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         setPopularClasses(data);

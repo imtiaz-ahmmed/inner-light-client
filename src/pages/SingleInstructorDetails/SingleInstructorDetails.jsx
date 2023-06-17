@@ -10,7 +10,7 @@ const SingleInstructorDetails = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/all-instructors/instructor/${instructorName}`
+          `https://inner-light-server-imtiaz-ahmmed.vercel.app/all-instructors/instructor/${instructorName}`
         );
         const data = await response.json();
         setInstructorData(data);

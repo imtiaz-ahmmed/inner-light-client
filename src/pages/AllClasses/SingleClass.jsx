@@ -30,13 +30,16 @@ const SingleClass = ({ allClass }) => {
         totalSeats,
         price,
       };
-      fetch("http://localhost:5000/selectedClasses", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(selectedClass),
-      })
+      fetch(
+        "https://inner-light-server-imtiaz-ahmmed.vercel.app/selectedClasses",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(selectedClass),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://inner-light-server-imtiaz-ahmmed.vercel.app",
 });
 
 const useAxiosSecure = () => {
