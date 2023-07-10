@@ -11,7 +11,7 @@ const ManageClasses = () => {
   const fetchClasses = async () => {
     try {
       const response = await fetch(
-        "https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes"
+        "https://inner-light-server-imtiaz-ahmmed.vercel.app//add-classes"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch classes");
@@ -30,7 +30,7 @@ const ManageClasses = () => {
   const handleApprove = async (classId) => {
     try {
       const response = await fetch(
-        `https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes/${classId}`,
+        `https://inner-light-server-imtiaz-ahmmed.vercel.app//${classId}`,
         {
           method: "PATCH",
           headers: {
@@ -60,7 +60,7 @@ const ManageClasses = () => {
   const handleDeny = async (classId) => {
     try {
       await fetch(
-        `https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes/${classId}`,
+        `https://inner-light-server-imtiaz-ahmmed.vercel.app//add-classes/${classId}`,
         {
           method: "PATCH",
           headers: {
@@ -85,16 +85,13 @@ const ManageClasses = () => {
 
   const handleSubmitFeedback = async (classId) => {
     try {
-      const response = await fetch(
-        `https://inner-light-server-imtiaz-ahmmed.vercel.app/add-classes/${classId}/feedback`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ feedback }),
-        }
-      );
+      const response = await fetch(`/add-classes/${classId}/feedback`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ feedback }),
+      });
 
       if (!response.ok) {
         console.error("Error sending feedback:", response.statusText);
